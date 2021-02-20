@@ -163,7 +163,8 @@ const props = {
     v: null, //visible
     c: null, //colorTransform
     m: null, //mask
-    g: null //not sure if we'll actually handle graphics this way?
+    g: null, //not sure if we'll actually handle graphics this way?
+    e: null //effects
 };
 
 //split r, g, b into separate values for tweening
@@ -271,6 +272,16 @@ function setPropFromShorthand(target, prop, value) {
             break;
         case "m":
             target.ma(value); // ma = setMask
+            break;
+        case "e":
+            // TODO: Improve and implement more.
+            if(!target.filters) {
+                target.filters = [ new PIXI.filters.BlurFilter(0) ];
+            }
+
+            if(value.blur) {
+                target.filters[0].blur = value.blur;
+            }
             break;
     }
 }

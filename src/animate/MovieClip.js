@@ -464,6 +464,88 @@ class MovieClip extends Container {
     }
 
     /**
+     * Add effect or effects
+     * @method PIXI.animate.MovieClip#addTimedEffect
+     * @param {PIXI.DisplayObject} instance Instance to effect
+     * @param {Object} keyframes The map of frames to effect objects
+     * @return {PIXI.animate.MovieClip} instance of clip for chaining
+     */
+    addTimedEffect(instance, keyframes) {
+        for (let i in keyframes) {
+            this.addKeyframe(instance, {
+                e: keyframes[i]
+            }, parseInt(i, 10));
+        }
+
+        // Set the initial position/add
+        this._setTimelinePosition(this.currentFrame, this.currentFrame, true);
+        return this;
+    }
+
+    /**
+     * Shortcut alias for `addTimedEffect`
+     * @method PIXI.animate.MovieClip#ae
+     * @param {PIXI.DisplayObject} instance Instance to effect
+     * @param {Object} keyframes The map of frames to effect objects
+     * @return {PIXI.animate.MovieClip} instance of clip for chaining
+     */
+    ae(instance, keyframes) {
+        return this.addTimedEffect(instance, keyframes);
+    }
+
+    /**
+     * Add tweened effect or effects
+     * @method PIXI.animate.MovieClip#addTweenedEffect
+     * @param {PIXI.DisplayObject} instance  Instance to effect
+     * @param {Number} startFrame Starting frame
+     * @param {Number} duration Length of tween
+     * @param {Object} keyframes The map of frames to effect objects
+     * @return {PIXI.animate.MovieClip} instance of clip for chaining 
+     */
+    addTweenedEffect(instance, startFrame, duration, keyframes) {
+        const frames = {};
+        let start = 0;
+
+        for (let i in keyframes) {
+            frames[i] = { e: keyframes[i] };
+
+            let end = parseInt(i, 10);
+
+            if(start != 0) {
+                let diff = end - start;
+                let base = (keyframes[i].blur - keyframes[start].blur) / diff;
+
+                for(let j = 1; j < diff; j++) {
+                    frames[start + j] = {
+                        e: {
+                            blur: keyframes[start].blur + (base * j)
+                        }
+                    };
+                }
+            }
+
+            start = end;
+        }
+
+        this.addTimedChild(instance, startFrame, duration, frames);
+
+        return this;
+    }
+
+    /**
+     * Shortcut alias for `addTweenedEffect`
+     * @method PIXI.animate.MovieClip#ate
+     * @param {PIXI.DisplayObject} instance  Instance to effect
+     * @param {Number} startFrame Starting frame
+     * @param {Number} duration Length of tween
+     * @param {Object} keyframes The map of frames to effect objects
+     * @return {PIXI.animate.MovieClip} instance of clip for chaining
+     */
+    ate(instance, startFrame, duration, keyframes) {
+        return this.addTweenedEffect(instance, startFrame, duration, keyframes);
+    }
+
+    /**
      * Add a tween to the clip
      * @method PIXI.animate.MovieClip#addTween
      * @param {PIXI.DisplayObject} instance The clip to tween
