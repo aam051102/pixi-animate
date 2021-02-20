@@ -17,7 +17,7 @@ npm install pixi-animate
 
 ### Dependencies
 
-* [Pixi.js v4](http://pixijs.com) is required
+* [Pixi.js v5](http://pixijs.com) is required
 
 ## Documentation
 
