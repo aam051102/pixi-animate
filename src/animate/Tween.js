@@ -274,9 +274,11 @@ function setPropFromShorthand(target, prop, value) {
             target.ma(value); // ma = setMask
             break;
         case "e":
-            // TODO: Improve and implement more.
+            // TODO: Improve and allow external implementation of new filters
             if(!target.filters) {
-                target.filters = [ new PIXI.filters.BlurFilter(0) ];
+                target.filters = [
+                    new PIXI.filters.BlurFilter(0)
+                ];
             }
 
             if(value.blur) {

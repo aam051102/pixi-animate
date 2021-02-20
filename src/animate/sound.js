@@ -11,4 +11,5 @@
  *    // where 'alias' is the ID in stage assets
  * });
  */
+// TODO: Implement modern sound system
 export default new PIXI.utils.EventEmitter();

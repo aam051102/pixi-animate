@@ -114,7 +114,7 @@ const load = function(options, parent, complete, basePath, loader, metadata) {
         createInstance: true
     }, options || {});
 
-    loader = loader || new PIXI.loaders.Loader();
+    loader = loader || PIXI.Loader.shared;
 
     function done() {
         let instance = (options.createInstance && typeof options.stage === "function") ? new options.stage() : null;

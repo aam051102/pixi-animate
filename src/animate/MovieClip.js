@@ -497,12 +497,10 @@ class MovieClip extends Container {
      * Add tweened effect or effects
      * @method PIXI.animate.MovieClip#addTweenedEffect
      * @param {PIXI.DisplayObject} instance  Instance to effect
-     * @param {Number} startFrame Starting frame
-     * @param {Number} duration Length of tween
      * @param {Object} keyframes The map of frames to effect objects
      * @return {PIXI.animate.MovieClip} instance of clip for chaining 
      */
-    addTweenedEffect(instance, startFrame, duration, keyframes) {
+    addTweenedEffect(instance, keyframes) {
         const frames = {};
         let start = 0;
 
@@ -512,22 +510,21 @@ class MovieClip extends Container {
             let end = parseInt(i, 10);
 
             if(start != 0) {
+                // TODO: Generalize for all effects instead of having to manually specify everything
                 let diff = end - start;
                 let base = (keyframes[i].blur - keyframes[start].blur) / diff;
 
-                for(let j = 1; j < diff; j++) {
-                    frames[start + j] = {
-                        e: {
-                            blur: keyframes[start].blur + (base * j)
-                        }
-                    };
+                for(let j = 1, p = start + 1; j < diff; j++, p++) {
+                    if(!frames[p]) frames[p] = { e: {} }
+
+                    frames[p].e.blur = keyframes[start].blur + (base * j)
                 }
             }
 
             start = end;
         }
 
-        this.addTimedChild(instance, startFrame, duration, frames);
+        this.addTimedEffect(instance, frames);
 
         return this;
     }
@@ -536,13 +533,11 @@ class MovieClip extends Container {
      * Shortcut alias for `addTweenedEffect`
      * @method PIXI.animate.MovieClip#ate
      * @param {PIXI.DisplayObject} instance  Instance to effect
-     * @param {Number} startFrame Starting frame
-     * @param {Number} duration Length of tween
      * @param {Object} keyframes The map of frames to effect objects
      * @return {PIXI.animate.MovieClip} instance of clip for chaining
      */
-    ate(instance, startFrame, duration, keyframes) {
-        return this.addTweenedEffect(instance, startFrame, duration, keyframes);
+    ate(instance, keyframes) {
+        return this.addTweenedEffect(instance, keyframes);
     }
 
     /**
