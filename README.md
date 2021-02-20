@@ -1,4 +1,9 @@
 # PIXI Animate
+This is a fork of the original [pixi-animate](https://github.com/pixijs/pixi-animate) repository. It has been upgraded to function on Pixi.js 5.1.3, and has the basic implementation of an effect system (currently only supporting blur).
+
+This fork is being developed according to the requirements of [Act Omega](https://mspfa.com/?s=16414&p=1), a Homestuck fancomic, which takes use of animations constructed in Adobe Animate CC.
+
+---
 
 A plugin for Pixi.js which provides a runtime for content export using PixiAnimate Extension.
 
