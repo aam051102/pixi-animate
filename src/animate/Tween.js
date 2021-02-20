@@ -1,3 +1,5 @@
+//import filterTypes from "./filterTypes";
+
 /**
  * Provide timeline playback of movieclip
  * @memberof PIXI.animate
@@ -81,11 +83,26 @@ class Tween {
             }
         }
 
-        //copy in any starting properties don't change
         for (prop in startProps) {
+            //copy in any starting properties don't change
             if (!this.endProps.hasOwnProperty(prop)) {
                 this.endProps[prop] = startProps[prop];
             }
+
+            // Add filters to target if they do not already exist
+            /*if(prop === "e") {
+                Object.keys(startProps[prop]).forEach((filter) => {
+                    const type = filterTypes[filter];
+
+                    if(type) {
+                        target.addFilter(new type(), filter);
+                    } else {
+                        if (typeof console !== "undefined" && console.warn) {
+                            console.warn("Warning: Could not add non-existent filter. Did you remember to add it to filterTypes?");
+                        }
+                    }
+                });
+            }*/
         }
     }
 
@@ -164,7 +181,7 @@ const props = {
     c: null, //colorTransform
     m: null, //mask
     g: null, //not sure if we'll actually handle graphics this way?
-    e: null //effects
+    e: {} //effects
 };
 
 //split r, g, b into separate values for tweening
@@ -274,16 +291,10 @@ function setPropFromShorthand(target, prop, value) {
             target.ma(value); // ma = setMask
             break;
         case "e":
-            // TODO: Improve and allow external implementation of new filters
-            if(!target.filters) {
-                target.filters = [
-                    new PIXI.filters.BlurFilter(0)
-                ];
-            }
-
-            if(value.blur) {
-                target.filters[0].blur = value.blur;
-            }
+            // TODO: Test.
+            /*Object.keys(value).forEach((type) => {
+                target.effects[type] = value[type];
+            });*/
             break;
     }
 }

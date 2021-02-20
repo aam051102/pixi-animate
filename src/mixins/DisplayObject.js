@@ -7,6 +7,32 @@ import utils from '../animate/utils';
  */
 const p = PIXI.DisplayObject.prototype;
 
+/**
+ * Key/value container for filters.
+ */
+p.effects = {};
+
+/**
+ * Adds a filter to a known position.
+ * @method PIXI.DisplayObject#addFilter
+ * @param  {PIXI.Filter} filter Filter to add
+ * @param  {String} name Name of filter to add
+ * @return {PIXI.DisplayObject}
+ */
+/**
+ * Shortcut to `addFilter`.
+ * @method PIXI.DisplayObject#af
+ * @param  {PIXI.Filter} filter Filter to add
+ * @param  {String} name Name of filter to add
+ * @return {PIXI.DisplayObject}
+ */
+/*p.addFilter = p.af = function(filter, name) {
+    if(!this.filters) this.filters = [];
+    this.effects[name] = filter;
+    this.filters.push(this.effects[name]);
+    return this;
+};*/
+
 // Color Matrix filter
 let ColorMatrixFilter;
 if (PIXI.filters) {

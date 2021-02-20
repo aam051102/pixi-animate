@@ -16,8 +16,8 @@ import sound from './sound';
  */
 class Scene extends PIXI.Application {
 
-	constructor(width, height, renderOptions, noWebGL) {
-		super(width, height, renderOptions, noWebGL);
+	constructor(options) {
+		super(options);
 
 		/**
 		 * Reference to the global sound object
