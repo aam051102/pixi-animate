@@ -97,7 +97,7 @@ class Tween {
                         const type = filterTypes[filter];
 
                         if(type) {
-                            target.addFilter(new type(), filter);
+                            target.addFilter(new type(), filter, startProps[prop][filter]);
                         } else {
                             if (typeof console !== "undefined" && console.warn) {
                                 console.warn("Warning: Could not add non-existent filter. Did you remember to add it to filterTypes?");
@@ -294,7 +294,6 @@ function setPropFromShorthand(target, prop, value) {
             target.ma(value); // ma = setMask
             break;
         case "e":
-            // TODO: Fix odd issue where blurring shows up before initial frame.
             Object.keys(value).forEach((type) => {
                 Object.keys(value[type]).forEach((property) => {
                     target.effects[type][property] = value[type][property];

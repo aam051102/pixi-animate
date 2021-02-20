@@ -32,11 +32,17 @@ if(!p.hasOwnProperty("effects")) {
  * @param  {String} name Name of filter to add
  * @return {PIXI.DisplayObject}
  */
-p.addFilter = p.af = function(filter, name) {
+p.addFilter = p.af = function(filter, name, args) {
     if(!this.filters) this.filters = [];
     if(!this.effects) this.effects = {};
     this.effects[name] = filter;
     this.filters.push(this.effects[name]);
+    
+    // Add arguments to filter
+    Object.keys(args).forEach((arg) => {
+        this.effects[name][arg] = args[arg];
+    });
+
     return this;
 };
 
