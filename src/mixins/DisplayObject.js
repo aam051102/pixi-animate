@@ -9,8 +9,14 @@ const p = PIXI.DisplayObject.prototype;
 
 /**
  * Key/value container for filters.
+ * @property {Object} effects
  */
-p.effects = {};
+if(!p.hasOwnProperty("effects")) {
+    Object.defineProperty(p, "effects", {
+        value: null,
+        writable: true,
+    });
+}
 
 /**
  * Adds a filter to a known position.
@@ -26,12 +32,13 @@ p.effects = {};
  * @param  {String} name Name of filter to add
  * @return {PIXI.DisplayObject}
  */
-/*p.addFilter = p.af = function(filter, name) {
+p.addFilter = p.af = function(filter, name) {
     if(!this.filters) this.filters = [];
+    if(!this.effects) this.effects = {};
     this.effects[name] = filter;
     this.filters.push(this.effects[name]);
     return this;
-};*/
+};
 
 // Color Matrix filter
 let ColorMatrixFilter;

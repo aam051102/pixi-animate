@@ -6,7 +6,7 @@ import Scene from './Scene';
 import ShapesCache from './ShapesCache';
 import SymbolLoader from './SymbolLoader';
 import Timeline from './Timeline';
-//import filterTypes from './filterTypes';
+import filterTypes from './filterTypes';
 import Tween from './Tween';
 import Animator from './Animator';
 import AnimatorTimeline from './AnimatorTimeline';
@@ -29,5 +29,5 @@ export {
     Timeline,
     Tween,
     VERSION,
-    //filterTypes
+    filterTypes
 };

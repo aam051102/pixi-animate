@@ -470,7 +470,7 @@ class MovieClip extends Container {
      * @param {Object} keyframes The map of frames to effect objects
      * @return {PIXI.animate.MovieClip} instance of clip for chaining
      */
-    /*addTimedEffect(instance, keyframes) {
+    addTimedEffect(instance, keyframes) {
         for (let i in keyframes) {
             this.addKeyframe(instance, {
                 e: keyframes[i]
@@ -480,7 +480,7 @@ class MovieClip extends Container {
         // Set the initial position/add
         this._setTimelinePosition(this.currentFrame, this.currentFrame, true);
         return this;
-    }*/
+    }
 
     /**
      * Shortcut alias for `addTimedEffect`
@@ -489,9 +489,9 @@ class MovieClip extends Container {
      * @param {Object} keyframes The map of frames to effect objects
      * @return {PIXI.animate.MovieClip} instance of clip for chaining
      */
-    /*ae(instance, keyframes) {
+    ae(instance, keyframes) {
         return this.addTimedEffect(instance, keyframes);
-    }*/
+    }
 
     /**
      * Add tweened effect or effects
@@ -500,7 +500,7 @@ class MovieClip extends Container {
      * @param {Object} keyframes The map of frames to effect objects
      * @return {PIXI.animate.MovieClip} instance of clip for chaining 
      */
-    /*addTweenedEffect(instance, keyframes) {
+    addTweenedEffect(instance, keyframes) {
         const frames = {};
         let start = 0;
 
@@ -527,7 +527,7 @@ class MovieClip extends Container {
         this.addTimedEffect(instance, frames);
 
         return this;
-    }*/
+    }
 
     /**
      * Shortcut alias for `addTweenedEffect`
@@ -536,9 +536,9 @@ class MovieClip extends Container {
      * @param {Object} keyframes The map of frames to effect objects
      * @return {PIXI.animate.MovieClip} instance of clip for chaining
      */
-    /*ate(instance, keyframes) {
+    ate(instance, keyframes) {
         return this.addTweenedEffect(instance, keyframes);
-    }*/
+    }
 
     /**
      * Add a tween to the clip

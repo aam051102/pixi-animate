@@ -1,4 +1,4 @@
-//import filterTypes from "./filterTypes";
+import filterTypes from "./filterTypes";
 
 /**
  * Provide timeline playback of movieclip
@@ -90,19 +90,22 @@ class Tween {
             }
 
             // Add filters to target if they do not already exist
-            /*if(prop === "e") {
+            if(prop === "e") {
+                //console.log(target.filters, target.effects, startProps[prop]);
                 Object.keys(startProps[prop]).forEach((filter) => {
-                    const type = filterTypes[filter];
+                    if((target.effects && !target.effects[filter]) || !target.effects) {
+                        const type = filterTypes[filter];
 
-                    if(type) {
-                        target.addFilter(new type(), filter);
-                    } else {
-                        if (typeof console !== "undefined" && console.warn) {
-                            console.warn("Warning: Could not add non-existent filter. Did you remember to add it to filterTypes?");
+                        if(type) {
+                            target.addFilter(new type(), filter);
+                        } else {
+                            if (typeof console !== "undefined" && console.warn) {
+                                console.warn("Warning: Could not add non-existent filter. Did you remember to add it to filterTypes?");
+                            }
                         }
                     }
                 });
-            }*/
+            }
         }
     }
 
@@ -291,10 +294,12 @@ function setPropFromShorthand(target, prop, value) {
             target.ma(value); // ma = setMask
             break;
         case "e":
-            // TODO: Test.
-            /*Object.keys(value).forEach((type) => {
-                target.effects[type] = value[type];
-            });*/
+            // TODO: Fix odd issue where blurring shows up before initial frame.
+            Object.keys(value).forEach((type) => {
+                Object.keys(value[type]).forEach((property) => {
+                    target.effects[type][property] = value[type][property];
+                });
+            });
             break;
     }
 }
