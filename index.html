@@ -303,15 +303,23 @@
             
                 <li data-name="PIXI.animate.MovieClip#addTimedChild"><a href="PIXI.animate.MovieClip.html#addTimedChild">addTimedChild</a></li>
             
+                <li data-name="PIXI.animate.MovieClip#addTimedEffect"><a href="PIXI.animate.MovieClip.html#addTimedEffect">addTimedEffect</a></li>
+            
                 <li data-name="PIXI.animate.MovieClip#addTimedMask"><a href="PIXI.animate.MovieClip.html#addTimedMask">addTimedMask</a></li>
             
                 <li data-name="PIXI.animate.MovieClip#addTween"><a href="PIXI.animate.MovieClip.html#addTween">addTween</a></li>
             
+                <li data-name="PIXI.animate.MovieClip#addTweenedEffect"><a href="PIXI.animate.MovieClip.html#addTweenedEffect">addTweenedEffect</a></li>
+            
                 <li data-name="PIXI.animate.MovieClip#advance"><a href="PIXI.animate.MovieClip.html#advance">advance</a></li>
+            
+                <li data-name="PIXI.animate.MovieClip#ae"><a href="PIXI.animate.MovieClip.html#ae">ae</a></li>
             
                 <li data-name="PIXI.animate.MovieClip#am"><a href="PIXI.animate.MovieClip.html#am">am</a></li>
             
                 <li data-name="PIXI.animate.MovieClip#at"><a href="PIXI.animate.MovieClip.html#at">at</a></li>
+            
+                <li data-name="PIXI.animate.MovieClip#ate"><a href="PIXI.animate.MovieClip.html#ate">ate</a></li>
             
                 <li data-name="PIXI.animate.MovieClip#gotoAndPlay"><a href="PIXI.animate.MovieClip.html#gotoAndPlay">gotoAndPlay</a></li>
             
@@ -722,25 +730,44 @@
 
 
     <section>
-        <article class="readme"><h1>PIXI Animate</h1><p>A plugin for Pixi.js which provides a runtime for content export using PixiAnimate Extension.</p>
+        <article class="readme"><h1>PIXI Animate</h1>
+<p>This is a fork of the original <a target="_blank" href="https://github.com/pixijs/pixi-animate">pixi-animate</a> repository. It has been upgraded to function on Pixi.js 5.1.3, and has the basic implementation of an effect system (currently only supporting blur).</p>
+<p>This fork is being developed according to the requirements of <a target="_blank" href="https://mspfa.com/?s=16414&amp;p=1">Act Omega</a>, a Homestuck fancomic, which takes use of animations constructed in Adobe Animate CC.</p>
+<hr>
+<p>A plugin for Pixi.js which provides a runtime for content export using PixiAnimate Extension.</p>
 <p><a target="_blank" href="https://travis-ci.org/pixijs/pixi-animate"><img src="https://travis-ci.org/pixijs/pixi-animate.svg?branch=master" alt="Build Status"></a> <a target="_blank" href="https://david-dm.org/pixijs/pixi-animate"><img src="https://david-dm.org/pixijs/pixi-animate.svg" alt="Dependency Status"></a> <a target="_blank" href="https://badge.fury.io/js/pixi-animate"><img src="https://badge.fury.io/js/pixi-animate.svg" alt="npm version"></a></p>
-<h2>Running Content</h2><h3>Installing Library</h3><p>To run content exported with PixiAnimate, you must load the JavaScript library within your project. You can install using <a target="_blank" href="http://bower.io">Bower</a> or <a target="_blank" href="http://www.npmjs.org">NPM</a>:</p>
-<h4>NPM</h4><pre class="prettyprint source"><code>npm install pixi-animate</code></pre><h3>Dependencies</h3><ul>
-<li><a target="_blank" href="http://pixijs.com">Pixi.js v4</a> is required</li>
+<h2>Running Content</h2>
+<h3>Installing Library</h3>
+<p>To run content exported with PixiAnimate, you must load the JavaScript library within your project. You can install using <a target="_blank" href="http://bower.io">Bower</a> or <a target="_blank" href="http://www.npmjs.org">NPM</a>:</p>
+<h4>NPM</h4>
+<pre class="prettyprint source"><code>npm install pixi-animate
+</code></pre>
+<h3>Dependencies</h3>
+<ul>
+<li><a target="_blank" href="http://pixijs.com">Pixi.js v5</a> is required</li>
 </ul>
-<h2>Documentation</h2><p>https://pixijs.io/pixi-animate/</p>
-<h2>Typescript</h2><p>You can use require to get the namespace for PixiAnimate:</p>
+<h2>Documentation</h2>
+<p>https://pixijs.io/pixi-animate/</p>
+<h2>Typescript</h2>
+<p>You can use require to get the namespace for PixiAnimate:</p>
 <pre class="prettyprint source lang-typescript"><code>// Note: Must also include the pixi.js typings globally!
 import animate = require('pixi-animate');
 
-let myMC:animate.MovieClip = new animate.MovieClip();</code></pre><p>Or use a triple slash reference for using the PIXI.animate namespace:</p>
+let myMC:animate.MovieClip = new animate.MovieClip();
+</code></pre>
+<p>Or use a triple slash reference for using the PIXI.animate namespace:</p>
 <pre class="prettyprint source lang-typescript"><code>// Note: Must also include the pixi.js typings globally!
 /// &lt;reference path=&quot;node_modules/pixi-animate/ambient.d.ts&quot; />
 require('pixi-animate');
 
-let myMC:PIXI.animate.MovieClip = new PIXI.animate.MovieClip();</code></pre><p>Or simply import pixi-animate (after importing pixi.js):</p>
+let myMC:PIXI.animate.MovieClip = new PIXI.animate.MovieClip();
+</code></pre>
+<p>Or simply import pixi-animate (after importing pixi.js):</p>
 <pre class="prettyprint source lang-typescript"><code>// Note: Must also include the pixi.js typings globally!
-import('pixi-animate');</code></pre><h2>License</h2><p>Copyright (c) 2016 <a target="_blank" href="http://github.com/jiborobot">Jibo, Inc.</a></p>
+import('pixi-animate');
+</code></pre>
+<h2>License</h2>
+<p>Copyright (c) 2016 <a target="_blank" href="http://github.com/jiborobot">Jibo, Inc.</a></p>
 <p>Released under the MIT License.</p></article>
     </section>
 
@@ -752,7 +779,7 @@ import('pixi-animate');</code></pre><h2>License</h2><p>Copyright (c) 2016 <a tar
         
 
         <footer>
-            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Jun 12 2019 10:59:09 GMT-0400 (Eastern Daylight Time)
+            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Sat Feb 20 2021 12:54:45 GMT+0100 (Central European Standard Time)
         </footer>
     </div>
 </div>

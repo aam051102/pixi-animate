@@ -303,15 +303,23 @@
             
                 <li data-name="PIXI.animate.MovieClip#addTimedChild"><a href="PIXI.animate.MovieClip.html#addTimedChild">addTimedChild</a></li>
             
+                <li data-name="PIXI.animate.MovieClip#addTimedEffect"><a href="PIXI.animate.MovieClip.html#addTimedEffect">addTimedEffect</a></li>
+            
                 <li data-name="PIXI.animate.MovieClip#addTimedMask"><a href="PIXI.animate.MovieClip.html#addTimedMask">addTimedMask</a></li>
             
                 <li data-name="PIXI.animate.MovieClip#addTween"><a href="PIXI.animate.MovieClip.html#addTween">addTween</a></li>
             
+                <li data-name="PIXI.animate.MovieClip#addTweenedEffect"><a href="PIXI.animate.MovieClip.html#addTweenedEffect">addTweenedEffect</a></li>
+            
                 <li data-name="PIXI.animate.MovieClip#advance"><a href="PIXI.animate.MovieClip.html#advance">advance</a></li>
+            
+                <li data-name="PIXI.animate.MovieClip#ae"><a href="PIXI.animate.MovieClip.html#ae">ae</a></li>
             
                 <li data-name="PIXI.animate.MovieClip#am"><a href="PIXI.animate.MovieClip.html#am">am</a></li>
             
                 <li data-name="PIXI.animate.MovieClip#at"><a href="PIXI.animate.MovieClip.html#at">at</a></li>
+            
+                <li data-name="PIXI.animate.MovieClip#ate"><a href="PIXI.animate.MovieClip.html#ate">ate</a></li>
             
                 <li data-name="PIXI.animate.MovieClip#gotoAndPlay"><a href="PIXI.animate.MovieClip.html#gotoAndPlay">gotoAndPlay</a></li>
             
@@ -810,7 +818,9 @@
 <dd>
     
     <div class="description">
-        <p>Event emitter for all sound events. This emits a single<br><code>play</code> event which contains the alias, loop and MovieClip which is playing<br>the sound.</p>
+        <p>Event emitter for all sound events. This emits a single<br>
+<code>play</code> event which contains the alias, loop and MovieClip which is playing<br>
+the sound.</p>
     </div>
     
     
@@ -845,10 +855,7 @@
         
 
     
-    <pre class="prettyprint"><code>PIXI.animate.sound.on('play', (alias, loop, context) => {
-   // custom handle sounds being played
-   // where 'alias' is the ID in stage assets
-});</code></pre>
+    <pre class="prettyprint"><code>PIXI.animate.sound.on('play', (alias, loop, context) => {   // custom handle sounds being played   // where 'alias' is the ID in stage assets});</code></pre>
     
 
     
@@ -861,874 +868,6 @@
         <h3 class="subsection-title">Methods</h3>
         
         <dl>
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id=".load">
-            
-            <span class="type-signature static">static</span>PIXI.animate.load<span class="signature">(StageRef, parent, <span class="optional">complete</span>, <span class="optional">basePath</span>, <span class="optional">loader</span>, <span class="optional">metadata</span>)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{PIXI.loaders.Loader}</span>
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="animate_load.js.html">animate/load.js</a>, <a href="animate_load.js.html#line51">line 51</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>Load the stage class and preload any assets</p>
-<pre class="prettyprint source"><code>let basePath = &quot;file:/path/to/assets&quot;;
-let renderer = new PIXI.autoDetectRenderer(1280, 720);
-
-let extensions = PIXI.compressedTextures.detectExtensions(renderer);
-let loader = new PIXI.loaders.Loader();
-// this is an example of setting up a pre loader plugin to handle compressed textures in this case
-loader.pre(PIXI.compressedTextures.extensionChooser(extensions));
-
-// specify metadata this way if you want to provide a default loading strategy for all assets listed in the PIXI animation
-let metadata = { default: { metadata: { imageMetadata: { choice: [&quot;.crn&quot;] } } } };
-// specify metadata this way if you want to provide a specific loading strategy for a certain asset listed inside the PIXI animation library
-let metadata = { MyStage_atlas_1: { metadata: { imageMetadata: { choice: [&quot;.crn&quot;] } } } };
-
-let stage = new PIXI.Container();
-PIXI.animate.load(lib.MyStage, stage, ()=>{}, basePath, loader, metadata);
-function update() {
-     renderer.render(stage);
-     update();
-}
-update();</code></pre>
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>StageRef</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                    
-                    
-                        
-                    
-                
-                <p>Reference to the stage class.</p>
-                
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>assets</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                    
-                        <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                <p>Assets used to preload.</p></td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-            </td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>parent</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type"><a href="PIXI.Container.html">PIXI.Container</a></span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                    
-                    
-                        
-                    
-                
-                <p>The Container to auto-add the stage to.</p></td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>complete</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                    
-                        <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                <p>The callback function when complete.</p></td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>basePath</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                    
-                        <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                <p>Base root directory</p></td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>loader</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">PIXI.loaders.Loader</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                    
-                        <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                <p>A Pixi loader object</p></td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>metadata</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                    
-                        <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                <p>A metadata object for the asset being loaded</p></td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Type</th>
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    
-        <tr>
-            
-            <td class="type">
-            
-                        PIXI.loaders.Loader
-                        
-                    
-            </td>
-            <td class="description last">instance of PIXI resource loader</td>
-        </tr>
-    
-    </tbody>
-</table>
-
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id=".load">
-            
-            <span class="type-signature static">static</span>PIXI.animate.load<span class="signature">(StageRef, parent, <span class="optional">basePath</span>)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{PIXI.loaders.Loader}</span>
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="animate_load.js.html">animate/load.js</a>, <a href="animate_load.js.html#line32">line 32</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>Load the stage class and preload any assets</p>
-<pre class="prettyprint source"><code>let renderer = new PIXI.autoDetectRenderer(1280, 720);
-let stage = new PIXI.Container();
-PIXI.animate.load(lib.MyStage, stage);
-function update() {
-     renderer.render(stage);
-     update();
-}
-update();</code></pre>
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>StageRef</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                    
-                    
-                        
-                    
-                
-                <p>Reference to the stage class.</p>
-                
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>assets</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                    
-                        <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                <p>Assets used to preload.</p></td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-            </td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>parent</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type"><a href="PIXI.Container.html">PIXI.Container</a></span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                    
-                    
-                        
-                    
-                
-                <p>The Container to auto-add the stage to.</p></td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>basePath</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                    
-                        <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                <p>Base root directory</p></td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Type</th>
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    
-        <tr>
-            
-            <td class="type">
-            
-                        PIXI.loaders.Loader
-                        
-                    
-            </td>
-            <td class="description last">instance of PIXI resource loader</td>
-        </tr>
-    
-    </tbody>
-</table>
-
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id=".load">
-            
-            <span class="type-signature static">static</span>PIXI.animate.load<span class="signature">(StageRef, complete)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{PIXI.loaders.Loader}</span>
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="animate_load.js.html">animate/load.js</a>, <a href="animate_load.js.html#line12">line 12</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>Load the stage class and preload any assets</p>
-<pre class="prettyprint source"><code>let renderer = new PIXI.autoDetectRenderer(1280, 720);
-let stage = new PIXI.Container();
-PIXI.animate.load(lib.MyStage, function(instance){
-    stage.addChild(instance);
-});
-function update() {
-     renderer.render(stage);
-     update();
-}
-update();</code></pre>
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>StageRef</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                <p>Reference to the stage class.</p>
-                
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>assets</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                    
-                        <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                <p>Assets used to preload.</p></td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-            </td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>complete</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                <p>The callback function when complete.</p></td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Type</th>
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    
-        <tr>
-            
-            <td class="type">
-            
-                        PIXI.loaders.Loader
-                        
-                    
-            </td>
-            <td class="description last">instance of PIXI resource loader</td>
-        </tr>
-    
-    </tbody>
-</table>
-
-    
-    
-    
-</dd>
-
-        
             
 <dt>
     <div class="nameContainer">
@@ -2063,6 +1202,877 @@ update();</code></pre>
     
 </dd>
 
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id=".load">
+            
+            <span class="type-signature static">static</span>PIXI.animate.load<span class="signature">(StageRef, complete)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{PIXI.loaders.Loader}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="animate_load.js.html">animate/load.js</a>, <a href="animate_load.js.html#line12">line 12</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Load the stage class and preload any assets</p>
+<pre class="prettyprint source"><code>let renderer = new PIXI.autoDetectRenderer(1280, 720);
+let stage = new PIXI.Container();
+PIXI.animate.load(lib.MyStage, function(instance){
+    stage.addChild(instance);
+});
+function update() {
+     renderer.render(stage);
+     update();
+}
+update();
+</code></pre>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>StageRef</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>Reference to the stage class.</p>
+                
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>assets</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                <p>Assets used to preload.</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+            </td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>complete</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>The callback function when complete.</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        PIXI.loaders.Loader
+                        
+                    
+            </td>
+            <td class="description last">instance of PIXI resource loader</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id=".load">
+            
+            <span class="type-signature static">static</span>PIXI.animate.load<span class="signature">(StageRef, parent, <span class="optional">basePath</span>)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{PIXI.loaders.Loader}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="animate_load.js.html">animate/load.js</a>, <a href="animate_load.js.html#line32">line 32</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Load the stage class and preload any assets</p>
+<pre class="prettyprint source"><code>let renderer = new PIXI.autoDetectRenderer(1280, 720);
+let stage = new PIXI.Container();
+PIXI.animate.load(lib.MyStage, stage);
+function update() {
+     renderer.render(stage);
+     update();
+}
+update();
+</code></pre>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>StageRef</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                    
+                        
+                    
+                
+                <p>Reference to the stage class.</p>
+                
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>assets</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                <p>Assets used to preload.</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+            </td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>parent</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="PIXI.Container.html">PIXI.Container</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                    
+                        
+                    
+                
+                <p>The Container to auto-add the stage to.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>basePath</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                <p>Base root directory</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        PIXI.loaders.Loader
+                        
+                    
+            </td>
+            <td class="description last">instance of PIXI resource loader</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id=".load">
+            
+            <span class="type-signature static">static</span>PIXI.animate.load<span class="signature">(StageRef, parent, <span class="optional">complete</span>, <span class="optional">basePath</span>, <span class="optional">loader</span>, <span class="optional">metadata</span>)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{PIXI.loaders.Loader}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="animate_load.js.html">animate/load.js</a>, <a href="animate_load.js.html#line51">line 51</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Load the stage class and preload any assets</p>
+<pre class="prettyprint source"><code>let basePath = &quot;file:/path/to/assets&quot;;
+let renderer = new PIXI.autoDetectRenderer(1280, 720);
+
+let extensions = PIXI.compressedTextures.detectExtensions(renderer);
+let loader = new PIXI.loaders.Loader();
+// this is an example of setting up a pre loader plugin to handle compressed textures in this case
+loader.pre(PIXI.compressedTextures.extensionChooser(extensions));
+
+// specify metadata this way if you want to provide a default loading strategy for all assets listed in the PIXI animation
+let metadata = { default: { metadata: { imageMetadata: { choice: [&quot;.crn&quot;] } } } };
+// specify metadata this way if you want to provide a specific loading strategy for a certain asset listed inside the PIXI animation library
+let metadata = { MyStage_atlas_1: { metadata: { imageMetadata: { choice: [&quot;.crn&quot;] } } } };
+
+let stage = new PIXI.Container();
+PIXI.animate.load(lib.MyStage, stage, ()=>{}, basePath, loader, metadata);
+function update() {
+     renderer.render(stage);
+     update();
+}
+update();
+</code></pre>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>StageRef</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                    
+                        
+                    
+                
+                <p>Reference to the stage class.</p>
+                
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>assets</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                <p>Assets used to preload.</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+            </td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>parent</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="PIXI.Container.html">PIXI.Container</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                    
+                        
+                    
+                
+                <p>The Container to auto-add the stage to.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>complete</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                <p>The callback function when complete.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>basePath</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                <p>Base root directory</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>loader</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">PIXI.loaders.Loader</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                <p>A Pixi loader object</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>metadata</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                <p>A metadata object for the asset being loaded</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        PIXI.loaders.Loader
+                        
+                    
+            </td>
+            <td class="description last">instance of PIXI resource loader</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
         </dl>
     
     
@@ -2082,7 +2092,7 @@ update();</code></pre>
         
 
         <footer>
-            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Jun 12 2019 10:59:09 GMT-0400 (Eastern Daylight Time)
+            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Sat Feb 20 2021 12:54:45 GMT+0100 (Central European Standard Time)
         </footer>
     </div>
 </div>
