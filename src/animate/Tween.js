@@ -91,7 +91,10 @@ class Tween {
 
             // Add filters to target if they do not already exist
             if(prop === "e") {
-                //console.log(target.filters, target.effects, startProps[prop]);
+                if(target.isWrapper) {
+                    target = target.children[0] || target;
+                }
+
                 Object.keys(startProps[prop]).forEach((filter) => {
                     if((target.effects && !target.effects[filter]) || !target.effects) {
                         const type = filterTypes[filter];
@@ -294,6 +297,10 @@ function setPropFromShorthand(target, prop, value) {
             target.ma(value); // ma = setMask
             break;
         case "e":
+            if(target.isWrapper) {
+                target = target.children[0] || target;
+            }
+
             Object.keys(value).forEach((type) => {
                 Object.keys(value[type]).forEach((property) => {
                     target.effects[type][property] = value[type][property];

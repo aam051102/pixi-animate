@@ -6,6 +6,18 @@
 const p = PIXI.Container.prototype;
 
 /**
+ * Boolean value defining whether or not element is a wrapper.
+ * If an element is a wrapper, there will be made an attempt to apply filters to the first child, with a fallback to itself.
+ * @property {Object} isWrapper
+ */
+if(!p.hasOwnProperty("isWrapper")) {
+    Object.defineProperty(p, "isWrapper", {
+        value: false,
+        writable: true,
+    });
+}
+
+/**
  * Shortcut for `addChild`.
  * @method PIXI.Container#ac
  * @param {*} [child*] N-number of children
