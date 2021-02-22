@@ -77,9 +77,29 @@ p.addTween = function(properties, startFrame, duration, ease) {
 p.addKeyframe = function(properties, startFrame) {
     this.extendLastFrame(startFrame - 1);
     let startProps = Object.assign({}, this._currentProps, properties);
-    //create the new Tween and add it to the list
-    let tween = new Tween(this.target, startProps, null, startFrame, 0);
-    this.push(tween);
+
+    // Look for tween with same starting frame
+    let tween;
+    for(let i = this.length - 1; i >= 0; i--) {
+        if(this[i].startFrame == startFrame) {
+            tween = this[i];
+            break;
+        }
+    }
+
+    if(!tween) {
+        //create the new Tween and add it to the list
+        tween = new Tween(this.target, startProps, null, startFrame, 0);
+        this.push(tween);
+    } else {
+        // Merge tweens
+        let prop;
+        for (prop in startProps) {
+            tween.endProps[prop] = tween.startProps[prop] = startProps[prop];
+        }
+    }
+
+    
     Object.assign(this._currentProps, tween.endProps);
 };
 
@@ -133,6 +153,8 @@ p.getPropFromShorthand = function(prop) {
             return target.visible;
         case 'm':
             return target.mask;
+        case 'e':
+            return target.effects;
             // case 't':
             //   return target.tint;
             //not sure if we'll actually handle graphics this way?

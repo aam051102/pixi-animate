@@ -572,7 +572,6 @@ class MovieClip extends Container {
      * @return {PIXI.animate.MovieClip}
      */
     addKeyframe(instance, properties, startFrame) {
-
         let timeline = this._getChildTimeline(instance);
         this._parseProperties(properties);
         timeline.addKeyframe(properties, startFrame);
@@ -947,6 +946,7 @@ class MovieClip extends Container {
                     // set the position within that tween
                     //and break the loop to move onto the next timeline
                     tween.setPosition(currentFrame);
+
                     break;
                 }
             }
