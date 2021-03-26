@@ -18,6 +18,24 @@ if(!p.hasOwnProperty("effects")) {
     });
 }
 
+function recurseProperty(property, target) {
+    const keys = Object.keys(property);
+
+    if(keys.length == 0) {
+        target = property;
+        return;
+    }
+
+    keys.forEach((type) => {
+        if(property[type].length !== undefined) {
+            target[type] = property[type];
+            return;
+        } else {
+            recurseProperty(property[type], target[type]);
+        }
+    });
+}
+
 /**
  * Adds a filter to a known position.
  * @method PIXI.DisplayObject#addFilter
@@ -39,9 +57,10 @@ p.addFilter = p.af = function(filter, name, args) {
     this.filters.push(this.effects[name]);
     
     // Add arguments to filter
-    Object.keys(args).forEach((arg) => {
+    /*Object.keys(args).forEach((arg) => {
         this.effects[name][arg] = args[arg];
-    });
+    });*/
+    recurseProperty(args, this.effects[name]);
 
     return this;
 };

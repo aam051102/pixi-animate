@@ -258,6 +258,24 @@ function lerpRotation(start, end, t) {
     return value;
 }
 
+function recurseProperty(property, target) {
+    const keys = Object.keys(property);
+
+    if(keys.length == 0) {
+        target = property;
+        return;
+    }
+
+    keys.forEach((type) => {
+        if(property[type].length !== undefined) {
+            target[type] = property[type];
+            return;
+        } else {
+            recurseProperty(property[type], target[type]);
+        }
+    });
+}
+
 function setPropFromShorthand(target, prop, value) {
     switch (prop) {
         case "x":
@@ -301,11 +319,12 @@ function setPropFromShorthand(target, prop, value) {
                 target = target.children[0] || target;
             }
 
-            Object.keys(value).forEach((type) => {
+            recurseProperty(value, target.effects);
+            /*Object.keys(value).forEach((type) => {
                 Object.keys(value[type]).forEach((property) => {
                     target.effects[type][property] = value[type][property];
                 });
-            });
+            });*/
             break;
     }
 }
