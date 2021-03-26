@@ -4,7 +4,9 @@
     ],
     "rules": {
         "no-console": 0,
-        "no-debugger": 1
+        "no-debugger": 1,
+        "no-prototype-builtins": "off",
+        "no-self-assign": "off"
     },
     "parserOptions": {
         "ecmaVersion": 6,

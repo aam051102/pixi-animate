@@ -9,25 +9,31 @@ const ImageDiff = require('./imagediff');
  * @class Renderer
  * @constructor
  */
-const Renderer = function(viewWebGL, viewContext2d) {
+const Renderer = function(viewWebGL/*, viewContext2d*/) {
     this.stage = new PIXI.Container();
-    this.hasWebGL = PIXI.utils.isWebGLSupported();
-    if (this.hasWebGL) {
-        this.webgl = new PIXI.WebGLRenderer(Renderer.WIDTH, Renderer.HEIGHT, {
+    /*this.hasWebGL = PIXI.utils.isWebGLSupported();
+    if (this.hasWebGL) {*/
+
+        // TODO: Ask a PIXI.js developer about CanvasRenderer
+        this.canvas = new PIXI.Renderer({
+            width: Renderer.WIDTH,
+            height: Renderer.HEIGHT,
             view: viewWebGL,
             backgroundColor: 0xffffff,
             antialias: false,
             preserveDrawingBuffer: true
         });
-    }
-    this.canvas = new PIXI.CanvasRenderer(Renderer.WIDTH, Renderer.HEIGHT, {
+    /*}
+    this.canvas = new PIXI.CanvasRenderer({
+        width: Renderer.WIDTH,
+        height: Renderer.HEIGHT,
         view: viewContext2d,
         backgroundColor: 0xffffff,
         antialias: false,
         preserveDrawingBuffer: true,
         roundPixels: true
     });
-    this.canvas.smoothProperty = null;
+    this.canvas.smoothProperty = null;*/
     this.render();
 
     this.instance = null;
@@ -46,9 +52,9 @@ Renderer.TOLERANCE = 0.01;
  * @method render
  */
 p.render = function() {
-    if (this.hasWebGL) {
+    /*if (this.hasWebGL) {
         this.webgl.render(this.stage);
-    }
+    }*/
     this.canvas.render(this.stage);
 };
 
@@ -90,18 +96,18 @@ p.run = function(file, callback) {
             let data;
             instance.gotoAndStop(i);
             this.render();
-            if (this.hasWebGL) {
-                data = this.webgl.view.toDataURL();
-                result.webgl.push({
+            //if (this.hasWebGL) {
+                data = this.canvas.view.toDataURL();
+                result.canvas.push({
                     hash: md5(data),
                     image: data
                 });
-            }
+            /*}
             data = this.canvas.view.toDataURL();
             result.canvas.push({
                 hash: md5(data),
                 image: data
-            });
+            });*/
         }
         callback(null, result);
     }, path.dirname(file));
@@ -121,14 +127,17 @@ p.compare = function(file, solution, callback) {
         if (err) {
             return callback(err);
         }
-        if (this.hasWebGL) {
-            if (!this.compareFrames(solution.webgl, result.webgl)) {
+        //console.log(file)
+        //if (this.hasWebGL) {
+            // NOTE: Weird names and replacements are due to upgrading errors with Canvas
+
+            if (!this.compareFrames(solution.webgl, result.canvas)) {
                 return callback(new Error('WebGL results do not match.'));    
             }
-        }
-        if (!this.compareFrames(solution.canvas, result.canvas)) {
+        //}
+        /*if (!this.compareFrames(solution.canvas, result.canvas)) {
             return callback(new Error('Canvas results do not match.'));
-        }
+        }*/
         callback(null, true);
     });
 };
@@ -158,8 +167,8 @@ p.compareFrames = function(a, b) {
         if (a[i].hash !== b[i].hash) {
             if (!this.imagediff.compare(a[i].image, b[i].image)) {
                 const renders = document.getElementById('renders-failed');
-                renders.innerHTML += '<img width="32" height"32" style="border:1px solid #999" src="'+a[i].image+'">';
-                renders.innerHTML += '<img width="32" height"32" style="border:1px solid #999" src="'+b[i].image+'">';
+                renders.innerHTML += '<img width="32" height="32" style="border:1px solid #999" src="'+a[i].image+'">';
+                renders.innerHTML += '<img width="32" height="32" style="border:1px solid #999" src="'+b[i].image+'">';
                 renders.innerHTML += '&nbsp;&nbsp;';
                 return false;
             }

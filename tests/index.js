@@ -1,7 +1,8 @@
 "use strict";
 
-require('pixi.js');
+global.PIXI = require('pixi.js-legacy');
 
+const chai = require('chai');
 function extendable(classRef) {
     assert.isOk(classRef.extend);
     assert.isOk(classRef.e);
@@ -14,7 +15,7 @@ function extendable(classRef) {
 }
 
 global.extendable = extendable;
-global.assert = global.chai.assert;
+global.assert = chai.assert;
 global.animate = require('../dist/pixi-animate');
 
 describe('PIXI', function() {

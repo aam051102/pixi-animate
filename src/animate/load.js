@@ -148,7 +148,8 @@ const load = function(options, parent, complete, basePath, loader, metadata) {
             }
             loader.add(id, basePath + assets[id], data);
         }
-        loader.once('complete', done).load();
+        loader.onComplete.once(done);
+        loader.load();
     } else {
         // tiny case where there's only text and no shapes/animations
         done();
